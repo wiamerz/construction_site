@@ -1,30 +1,27 @@
 import mongoose from "mongoose";
 
 const ProjectSchema = new mongoose.Schema({
-    Name:{
-     type: String,
-     required : [true, "project name required"]
-    },
-    Description:{
+    Name: {
         type: String,
-        required : [true, "project description required"]
-       
+        require: [true, "project name required"]
     },
-    StarteDate:{
+    Description: {
+        type: String,
+        require: [true, "project description required"]
+    },
+    StartDate: {
         type: Date,
-        required : [true, "Start date required"]
-       
+        require: [true, "Start date required"]
     },
-    EndDate:{
+    EndDate: {
         type: Date,
-        required : [true, "End date required"]
-       
+        require: [true, "End date required"]
     },
-    Budget:{
+    Budget: {
         type: Number,
-        required : [true, "project budget required"]
-       
+        require: [true, "project budget required"]
     }
 });
 
-module.exports = mongoose.model('User', ProjectSchema);
+const ProjectModel = mongoose.model('project', ProjectSchema);
+export default ProjectModel; 

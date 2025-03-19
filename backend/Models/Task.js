@@ -1,24 +1,23 @@
 import mongoose from "mongoose";
 
 const TaskSchema = new mongoose.Schema({
-    Name:{
+    Name: {
         type: String,
-        required : [true, "project name required"]
-       },
-       Description:{
-           type: String,
-           required : [true, "project description required"]
-          
-       },
-       StarteDate:{
-           type: Date,
-           required : [true, "Start date required"]
-          
-       },
-       EndDate:{
-           type: Date,
-           required : [true, "End date required"]
-          
-       }
-})
+        require: [true, "project name required"]
+    },
+    Description: {
+        type: String,
+        require: [true, "project description required"]
+    },
+    StartDate: { // Correction de la faute de frappe : StarteDate -> StartDate
+        type: Date,
+        require: [true, "Start date required"]
+    },
+    EndDate: {
+        type: Date,
+        require: [true, "End date required"]
+    }
+});
 
+const TaskModel = mongoose.model('task', TaskSchema);
+export default TaskModel; 

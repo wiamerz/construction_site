@@ -1,4 +1,4 @@
-import RessourceModel from "../Models/Ressource";
+import RessourceModel from "../Models/Ressource.js";
 
 
 const CreatRessource = async(req, res) => {
@@ -29,7 +29,7 @@ const GetRessource = async(req, res) => {
 const UpdateRessource = async(req, res) => {
     try {
         const RessourceId = req.params.id;
-        const Ressource = await RessourceModel.findbyIdAndUpdate(RessourceId, req.body);
+        const Ressource = await RessourceModel.findByIdAndUpdate(RessourceId, req.body);
         res.status(200).send(Ressource);
         console.log("Updating Ressource succefully");      
     } catch (error) {
@@ -42,7 +42,7 @@ const UpdateRessource = async(req, res) => {
 const DeleteRessource = async(req, res) => {
     try {
         const RessourceId = req.params.id;
-        const Ressource = await RessourceModel.findbyIdAndDelete(RessourceId, req.body);
+        const Ressource = await RessourceModel.findByIdAndDelete(RessourceId, req.body);
         res.status(200).send(Ressource);
         console.log("Updating Ressource succefully");      
     } catch (error) {

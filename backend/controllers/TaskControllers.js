@@ -1,4 +1,4 @@
-import TaskModel from "../Models/Task";
+import TaskModel from "../Models/Task.js";
 
 
 const CreatTask = async(req, res) => {
@@ -29,7 +29,7 @@ const GetTask = async(req, res) => {
 const UpdateTask = async(req, res) => {
     try {
         const TaskId = req.params.id;
-        const task = await TaskModel.findbyIdAndUpdate(TaskId, req.body);
+        const task = await TaskModel.findByIdAndUpdate(TaskId, req.body);
         res.status(200).send(task);
         console.log("Updating task succefully");      
     } catch (error) {
@@ -42,7 +42,7 @@ const UpdateTask = async(req, res) => {
 const DeleteTask = async(req, res) => {
     try {
         const TaskId = req.params.id;
-        const task = await TaskModel.findbyIdAndDelete(TaskId, req.body).populate('ressources');
+        const task = await TaskModel.findByIdAndDelete(TaskId, req.body).populate('ressources');
         res.status(200).send(task);
         console.log("Updating task succefully");      
     } catch (error) {

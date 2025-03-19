@@ -1,4 +1,4 @@
-import ProjectModel from "../Models/Projects";
+import ProjectModel from "../Models/Projects.js";
 
 
 const CreatProject = async(req, res) => {
@@ -29,7 +29,7 @@ const GetProject = async(req, res) => {
 const UpdateProject = async(req, res) => {
     try {
         const ProjectId = req.params.id;
-        const project = await ProjectModel.findbyIdAndUpdate(ProjectId, req.body);
+        const project = await ProjectModel.findByIdAndUpdate(ProjectId, req.body);
         res.status(200).send(project);
         console.log("Updating projects succefully");      
     } catch (error) {
@@ -42,7 +42,7 @@ const UpdateProject = async(req, res) => {
 const DeleteProject = async(req, res) => {
     try {
         const ProjectId = req.params.id;
-        const project = await ProjectModel.findbyIdAndDelete(ProjectId, req.body).populate('tasks').populate('ressources');
+        const project = await ProjectModel.findByIdAndDelete(ProjectId, req.body).populate('tasks').populate('ressources');
         res.status(200).send(project);
         console.log("Updating projects succefully");      
     } catch (error) {
