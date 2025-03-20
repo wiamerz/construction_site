@@ -16,7 +16,7 @@ const CreatTask = async(req, res) => {
 
 const GetTask = async(req, res) => {
     try {
-        const task = await TaskModel.find().populate('ressources');
+        const task = await TaskModel.find(req.body).populate('ressources');
         res.status(200).send(task)  ;
         console.log("Getting tasks succefully");      
     } catch (error) {

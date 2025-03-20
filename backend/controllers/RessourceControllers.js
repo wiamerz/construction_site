@@ -16,7 +16,7 @@ const CreatRessource = async(req, res) => {
 
 const GetRessource = async(req, res) => {
     try {
-        const Ressource = await RessourceModel.find();
+        const Ressource = await RessourceModel.find(req.body);
         res.status(200).send(Ressource)  ;
         console.log("Getting Ressources succefully");      
     } catch (error) {

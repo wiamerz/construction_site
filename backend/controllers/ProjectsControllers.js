@@ -16,7 +16,7 @@ const CreatProject = async(req, res) => {
 
 const GetProject = async(req, res) => {
     try {
-        const project = await ProjectModel.find().populate('tasks').populate('ressources');
+        const project = await ProjectModel.find(req.body).populate('tasks').populate('ressources');
         res.status(200).send(project)  ;
         console.log("Getting projects succefully");      
     } catch (error) {
@@ -28,13 +28,20 @@ const GetProject = async(req, res) => {
 
 const UpdateProject = async(req, res) => {
     try {
-        const ProjectId = req.params.id;
-        const project = await ProjectModel.findByIdAndUpdate(ProjectId, req.body);
+        const project = await ProjectModel.findByIdAndUpdate(
+            req.params.id, 
+            req.body,
+            { new: true }
+        );
+
+        if (!project){
+            return res.status(404).json({message:"project not found"});
+        }
         res.status(200).send(project);
         console.log("Updating projects succefully");      
     } catch (error) {
-        console.error("Failedettin Updating project");
-        res.status(400).json({messge: "Failed Updating project"});
+        console.error("Failed Updating project");
+        res.status(400).json({message: "Failed Updating project"});
         
     }
 }
@@ -42,12 +49,26 @@ const UpdateProject = async(req, res) => {
 const DeleteProject = async(req, res) => {
     try {
         const ProjectId = req.params.id;
-        const project = await ProjectModel.findByIdAndDelete(ProjectId, req.body).populate('tasks').populate('ressources');
-        res.status(200).send(project);
-        console.log("Updating projects succefully");      
+
+        if (!projectId){
+            return res.status(404).json({message:"project  ID not found"});
+        }
+
+        const project = await ProjectModel.findById(ProjectId).populate('tasks').populate('ressources');
+        
+        if (!project){
+            return res.status(404).json({message:"project not found"});
+        }
+
+        await ProjectModel.findByIdAndDelete(ProjectId);
+
+        
+        
+        res.status(200).json({message:"Project deleted successfully", project});
+        console.log("delleting projects succefully");      
     } catch (error) {
-        console.error("Failedettin Updating project");
-        res.status(400).json({messge: "Failed Updating project"});
+        console.error("Failed Deletting project");
+        res.status(400).json({messge: "Failed deletting project"});
         
     }
 }

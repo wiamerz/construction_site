@@ -5,7 +5,7 @@ const ProjectRoute = express.Router();
 
 ProjectRoute.post("/AddProject", CreatProject);
 ProjectRoute.get("/GetProject", GetProject);
-ProjectRoute.put("/UpdateProject", UpdateProject);
-ProjectRoute.delete("/DeleteProject", DeleteProject);
+ProjectRoute.put("/UpdateProject/:id", UpdateProject);
+ProjectRoute.delete("/DeleteProject/:id", DeleteProject);
 
 export default ProjectRoute;
