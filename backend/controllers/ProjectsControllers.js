@@ -5,6 +5,7 @@ const CreatProject = async(req, res) => {
     try{
         const project = await ProjectModel.create(req.body);
         res.status(200).send(project);
+        await project.save();
         console.log("Project added succefully")
 
     } catch (error) {

@@ -20,7 +20,7 @@ const Home = () => {
   </div>
 
 
-{/* -------------------------about u-----------------------*/}
+{/* -------------------------about us-----------------------*/}
   <div className='text-2xl m-15 font-bold text-red-600 flex justify-start items-center'>
      # About us
   </div>
