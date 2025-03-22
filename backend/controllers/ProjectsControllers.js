@@ -4,8 +4,9 @@ import ProjectModel from "../Models/Projects.js";
 const CreatProject = async(req, res) => {
     try{
         const project = await ProjectModel.create(req.body);
-        res.status(200).send(project);
         await project.save();
+        res.status(200).send(project);
+        // await project.save();
         console.log("Project added succefully")
 
     } catch (error) {
@@ -17,10 +18,12 @@ const CreatProject = async(req, res) => {
 
 const GetProject = async(req, res) => {
     try {
-        const project = await ProjectModel.find(req.body).populate('tasks').populate('ressources');
+        const project = await ProjectModel.find(req.body);
         res.status(200).send(project)  ;
-        console.log("Getting projects succefully");      
+        console.log("Getting projects succefully");  
+          
     } catch (error) {
+
         console.error("Failed getting project");
         res.status(400).json({messge: "Failed getting project"});
         
@@ -51,11 +54,11 @@ const DeleteProject = async(req, res) => {
     try {
         const ProjectId = req.params.id;
 
-        if (!projectId){
+        if (!ProjectId){
             return res.status(404).json({message:"project  ID not found"});
         }
 
-        const project = await ProjectModel.findById(ProjectId).populate('tasks').populate('ressources');
+        const project = await ProjectModel.findById(ProjectId);
         
         if (!project){
             return res.status(404).json({message:"project not found"});
@@ -76,3 +79,5 @@ const DeleteProject = async(req, res) => {
 
 
 export{CreatProject, GetProject, UpdateProject, DeleteProject};
+
+

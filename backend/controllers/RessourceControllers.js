@@ -4,6 +4,7 @@ import RessourceModel from "../Models/Ressource.js";
 const CreatRessource = async(req, res) => {
     try{
         const Ressource = await RessourceModel.create(req.body);
+        await Ressource.save();
         res.status(200).send(Ressource);
         console.log("Ressource added succefully")
 
@@ -44,10 +45,10 @@ const DeleteRessource = async(req, res) => {
         const RessourceId = req.params.id;
         const Ressource = await RessourceModel.findByIdAndDelete(RessourceId, req.body);
         res.status(200).send(Ressource);
-        console.log("Updating Ressource succefully");      
+        console.log("Deletting Ressource succefully");      
     } catch (error) {
-        console.error("Failedettin Updating Ressource");
-        res.status(400).json({messge: "Failed Updating Ressource"});
+        console.error("Failedettin Deletting Ressource");
+        res.status(400).json({messge: "Failed Deletting Ressource"});
         
     }
 }

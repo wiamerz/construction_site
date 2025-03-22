@@ -4,6 +4,7 @@ import TaskModel from "../Models/Task.js";
 const CreatTask = async(req, res) => {
     try{
         const task = await TaskModel.create(req.body);
+        await task.save();
         res.status(200).send(task);
         console.log("Task added succefully")
 
@@ -16,7 +17,7 @@ const CreatTask = async(req, res) => {
 
 const GetTask = async(req, res) => {
     try {
-        const task = await TaskModel.find(req.body).populate('ressources');
+        const task = await TaskModel.find(req.body);
         res.status(200).send(task)  ;
         console.log("Getting tasks succefully");      
     } catch (error) {
@@ -42,12 +43,12 @@ const UpdateTask = async(req, res) => {
 const DeleteTask = async(req, res) => {
     try {
         const TaskId = req.params.id;
-        const task = await TaskModel.findByIdAndDelete(TaskId, req.body).populate('ressources');
+        const task = await TaskModel.findByIdAndDelete(TaskId, req.body);
         res.status(200).send(task);
-        console.log("Updating task succefully");      
+        console.log("Delleting task succefully");      
     } catch (error) {
-        console.error("Failedettin Updating task");
-        res.status(400).json({messge: "Failed Updating task"});
+        console.error("Failed deletting task");
+        res.status(400).json({messge: "Failed deletting task"});
         
     }
 }

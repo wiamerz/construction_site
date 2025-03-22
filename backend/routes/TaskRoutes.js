@@ -5,7 +5,7 @@ const TaskRoute = express.Router();
 
 TaskRoute.post("/AddTask", CreatTask);
 TaskRoute.get("/GetTask", GetTask);
-TaskRoute.put("/UpdateTask", UpdateTask);
-TaskRoute.delete("/DeleteTask", DeleteTask);
+TaskRoute.put("/UpdateTask/:id", UpdateTask);
+TaskRoute.delete("/DeleteTask/:id", DeleteTask);
 
 export default TaskRoute;

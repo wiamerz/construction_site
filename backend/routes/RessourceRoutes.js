@@ -5,7 +5,7 @@ const RessourceRoute = express.Router();
 
 RessourceRoute.post("/AddRessource", CreatRessource);
 RessourceRoute.get("/GetRessource", GetRessource);
-RessourceRoute.put("/UpdateRessource", UpdateRessource);
-RessourceRoute.delete("/DeleteRessource", DeleteRessource);
+RessourceRoute.put("/UpdateRessource/:id", UpdateRessource);
+RessourceRoute.delete("/DeleteRessource/:id", DeleteRessource);
 
 export default RessourceRoute;
