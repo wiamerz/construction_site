@@ -30,6 +30,13 @@ const Gestion = () => {
     if (!formData.Startdate.trim()) newErrors.Startdate = 'Start date is required';
     if (!formData.Enddate.trim()) newErrors.Enddate = 'End date is required'; 
     if (!formData.Budget || formData.Budget < 0) newErrors.Budget = 'Budget should not be negative';
+   
+    
+    const startDate = new Date(formData.Startdate);
+    const endDate = new Date(formData.Enddate);
+    if (startDate > endDate) {
+      newErrors.Enddate = 'End date must be after start date';
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -42,30 +49,35 @@ const Gestion = () => {
       toast.error("You should correct the errors.");
       return;
     }
-
-    const data = { 
+     
+     const data = { 
       Name: formData.Name, 
       Description: formData.Description, 
       Startdate: formData.Startdate, 
       Enddate: formData.Enddate, 
       Budget: formData.Budget
     };
+  
 
-    try {
-      const response = await axios.post("http://localhost:5000/api/project/AddProject", data, { 
-        headers: { 
-          'Content-Type': 'application/json' 
-        },
-      });
-
-      if (response.status === 200 || response.status === 201) {
-        toast.success("Project added successfully!");
-        setFormData({ Name: '', Description: '', Startdate: '', Enddate: '', Budget: '' });
-      }
-    } catch (error) {
-      console.error("Error adding project:", error);
-      toast.error("Error adding project");
+  try {
+    console.log("Sending data:", data);
+    const response = await axios.post("http://localhost:5000/api/project/AddProject", data, { 
+      headers: { 
+        'Content-Type': 'application/json' 
+      },
+    });
+    console.log("Response:", response);
+    
+    if (response.status === 200 || response.status === 201) {
+      toast.success("Project added successfully!");
+      setFormData({ Name: '', Description: '', Startdate: '', Enddate: '', Budget: '' });
     }
+  } catch (error) {
+    console.error("Error adding project:", error.response ? error.response.data : error.message);
+    toast.error("Error adding project: " + (error.response ? error.response.data.message : error.message));
+  }
+
+
   };
 
   return (
@@ -139,8 +151,17 @@ const Gestion = () => {
             >
               Submit
             </button>
+
+
           </form>
         </div>
+
+        <button
+              type="submit"
+              className="flex justify-end items-end bg-red-600 text-white py-2 font-semibold hover:bg-red-700 transition"
+            >
+              Submit
+            </button>
       </div>
     </>
   );

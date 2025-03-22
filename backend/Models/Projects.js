@@ -9,11 +9,11 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         require: [true, "project description required"]
     },
-    StartDate: {
+    Startdate: {
         type: Date,
         require: [true, "Start date required"]
     },
-    EndDate: {
+    Enddate: {
         type: Date,
         require: [true, "End date required"]
     },

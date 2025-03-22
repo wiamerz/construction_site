@@ -1,12 +1,16 @@
 import dotenv from 'dotenv';
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 import ProjectRoutes from './routes/ProjectsRoutes.js';
 import TasksRoutes from './routes/TaskRoutes.js';
 import RessourcesRoutes from './routes/RessourceRoutes.js';
-
 dotenv.config();
 const app = express();
+
+
+
+app.use(cors());
 
 // Add middleware to parse JSON request bodies
 app.use(express.json());
@@ -19,6 +23,7 @@ mongoose.connect(mongoURI)
  .catch(err => {
     console.error('MongoDB connection error:', err);
  });
+
 
 // Routes
 app.use('/api/project', ProjectRoutes);

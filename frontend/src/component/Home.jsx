@@ -5,20 +5,10 @@ import myImage from "/src/assets/bg.jpg";
 import about from "/src/assets/about.jpg"
 import Navbar from './Navbar';
 import Footer from './Footer';
+import Projects from './Projects';
 
 const Home = () => {
-  const [projects, setProjects] = useState([]);
-    
-  useEffect(() => {
-    axios.get("http://localhost:5000/api/project/GetProject")
-      .then(response => {
-        console.log("Projects retrieved:", response.data);
-        if (response.data && response.data.data) {
-          setProjects(response.data.data);
-        }
-      })
-      .catch(err => console.error("Error retrieving projects:", err));
-  }, []);
+ 
   
   return (
     <>
@@ -50,28 +40,7 @@ const Home = () => {
         </div>
       </div>
       
-      {/* Projects display */}
-      <div className='text-2xl m-15 font-bold text-red-600 flex justify-start'>
-        # Projects
-        <div className="flex flex-col items-center justify-center min-h-screen p-8 m-10 rounded-2xl bg-gray-100">
-          <div className="w-full max-w-4xl">
-            {projects.length === 0 ? (
-              <p className="text-center text-gray-500">No projects added.</p>
-            ) : (
-              projects.map((project) => (
-                <div key={project._id} className="bg-white p-4 rounded-lg shadow-md mb-4">
-                  <h2 className="text-xl font-semibold">{project.Name}</h2>
-                  <p className="text-gray-700">{project.Description}</p>
-                  <p className="text-gray-500">
-                    {new Date(project.StartDate).toLocaleDateString()} → {new Date(project.EndDate).toLocaleDateString()}
-                  </p>
-                  <p className="text-red-600 font-bold">Budget: {project.Budget} MAD</p>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
-      </div>
+      <Projects/>
 
       <Footer/>
     </>
