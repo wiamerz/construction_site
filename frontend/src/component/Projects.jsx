@@ -40,6 +40,9 @@ const Projects = () => {
 
 
 
+
+  
+
   const handleEditClick = (project) => { 
     const formatDate = (dateString) => { // Format dates to YYYY-MM-DD
       const date = new Date(dateString);
@@ -138,10 +141,10 @@ const Projects = () => {
                       transition={{ duration: 0.3 }}
                     >
                       <button  onClick={()=> handleEditClick(project)} className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
-                        Modifier
+                        Edit
                       </button>
                       <button onClick={() => handleDelete(project._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
-                        Supprimer
+                        Delete
                       </button >
                       <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                          details
