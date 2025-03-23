@@ -4,6 +4,23 @@ import { motion } from "framer-motion";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
+  const [errors, setErrors] = useState({}); 
+  const [editingProject, setEditingProject] = useState(null);
+  const [formData, setFormData] = useState({
+      Name: '',
+      Description: '',
+      Startdate: '',
+      Enddate: '',
+      Budget: '',
+    });
+
+    const handleInputChange = (e) => {
+      const { name, value, type, files } = e.target;
+      setFormData (prev => ({
+        ...prev,
+        [name]: type === "file" ? files [0] : value
+      }))
+    }
 
   useEffect(() => {
     axios
@@ -12,7 +29,7 @@ const Projects = () => {
         console.log("Raw response:", response);
         console.log("Projects fetched:", response.data);
   
-        if (Array.isArray(response.data)) {  // Vérifier si c'est bien un tableau
+        if (Array.isArray(response.data)) { 
           setProjects(response.data);
         } else {
           console.error("Unexpected response format:", response.data);
@@ -21,11 +38,48 @@ const Projects = () => {
       .catch((err) => console.error("Error retrieving projects:", err));
   }, []);
 
+
+
+
+
+
+
+
+  const handleEditClick = (project) => { 
+    const formatDate = (dateString) => { // Format dates to YYYY-MM-DD
+      const date = new Date(dateString);
+      return date.toISOString().split('T')[0];
+    };
+  
+    setEditingProject(project);
+    setFormData({
+      Name: project.Name,
+      Description: project.Description,
+      Startdate: formatDate(project.Startdate),
+      Enddate: formatDate(project.Enddate),
+      Budget: project.Budget,
+    });
+  };
+
   // handle project edition
-  const handleEdit = (id) => {
+  const handleEdit = (e) => {
+    e.preventDefault();
     
+    if (editingProject) {
+      axios.put(`http://localhost:5000/api/project/UpdateProject/${editingProject._id}`, formData)
+        .then(response => {
+        
+          setProjects(projects.map(project => 
+            project._id === editingProject._id ? {...project, ...formData} : project
+          ));
+          setEditingProject(null); 
+        })
+        .catch(err => console.error("Update error:", err));
+    }
   };
  
+
+
 
 
   // handle project deletion
@@ -88,7 +142,7 @@ const Projects = () => {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <button className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
+                      <button  onClick={()=> handleEditClick(project)} className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                         Modifier
                       </button>
                       <button onClick={() => handleDelete(project._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
@@ -107,6 +161,88 @@ const Projects = () => {
             )}
           </tbody>
         </table>
+
+
+
+{/* --------------editing card----------------- */}
+
+        {editingProject && (
+       <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div className="bg-white p-6 rounded-lg shadow-lg w-1/2">
+
+             <h2 className="text-xl  font-semibold flex text-red-600 items-center gap-2 mb-6">
+               # Edit project
+             </h2>
+             <form onSubmit={handleEdit} className=" text-black space-y-4"> 
+               <label htmlFor="Name" className="text-gray-700 font-semibold">Project Name</label>
+               <input
+                 type="text"
+                 name="Name"
+                 value={formData.Name}
+                 onChange={handleInputChange}
+                 className="w-full p-2 border border-gray-600 rounded-md"
+               />
+               {errors.Name && <p className="text-red-500 text-sm">{errors.Name}</p>}
+   
+               <label htmlFor="Description" className="text-gray-700 font-semibold">Project Description</label>
+               <input
+                 type="text"
+                 name="Description"
+                 value={formData.Description}
+                 onChange={handleInputChange}
+                 className="w-full p-2 border border-gray-600 rounded-md"
+               />
+               {errors.Description && <p className="text-red-500 text-sm">{errors.Description}</p>}
+   
+               <label htmlFor="Startdate" className="text-gray-700 font-semibold">Start Date</label>
+               <input
+                 type="date"
+                 name="Startdate"
+                 value={formData.Startdate}
+                 onChange={handleInputChange}
+                 className="w-full p-2 border border-gray-600 rounded-md"
+               />
+               {errors.Startdate && <p className="text-red-500 text-sm">{errors.Startdate}</p>}
+   
+               <label htmlFor="Enddate" className="text-gray-700 font-semibold">End Date</label>
+               <input
+                 type="date"
+                 name="Enddate"
+                 value={formData.Enddate}
+                 onChange={handleInputChange}
+                 className="w-full p-2 border border-gray-600 rounded-md"
+               />
+               {errors.Enddate && <p className="text-red-500 text-sm">{errors.Enddate}</p>}
+   
+               <label htmlFor="Budget" className="text-gray-700 font-semibold">Budget (in MAD)</label>
+               <input
+                 type="number"
+                 name="Budget"
+                 value={formData.Budget}
+                 onChange={handleInputChange}
+                 className="w-full p-2 border border-gray-600 rounded-md"
+               />
+               {errors.Budget && <p className="text-red-500 text-sm">{errors.Budget}</p>}
+   
+               <button
+                 type="submit"
+                 className="flex justify-end items-end bg-red-600 text-white py-2 font-semibold hover:bg-red-700 transition"
+               >
+                 Edit
+               </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingProject(null)}
+                    className="flex justify-end items-end bg-gray-600 text-white py-2 px-4 font-semibold hover:bg-gray-700 transition"
+                  >
+                    Cancel
+                  </button>
+   
+   
+             </form>
+           </div>
+        </div>
+        )}
       </div>
     </div>
   );
