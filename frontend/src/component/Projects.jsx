@@ -40,11 +40,6 @@ const Projects = () => {
 
 
 
-
-
-
-
-
   const handleEditClick = (project) => { 
     const formatDate = (dateString) => { // Format dates to YYYY-MM-DD
       const date = new Date(dateString);
@@ -99,7 +94,7 @@ const Projects = () => {
     <div className="container mx-auto p-8">
       {/* Title */}
       <div className='text-2xl m-15 font-bold text-red-600 flex justify-start items-center'>
-        # About us
+        # Projects
       </div>
 
       {/* Table Container */}
@@ -147,7 +142,14 @@ const Projects = () => {
                       </button>
                       <button onClick={() => handleDelete(project._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                         Supprimer
+                      </button >
+                      <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
+                         details
                       </button>
+                      {/* <Link to={`/project/${project._id}`} className="text-blue-500 hover:underline">
+                        Voir Détails
+                      </Link> */}
+
                     </motion.div>
                   </td>
                 </motion.tr>
