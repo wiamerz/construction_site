@@ -16,7 +16,11 @@ const TaskSchema = new mongoose.Schema({
     EndDate: {
         type: Date,
         require: [true, "End date required"]
-    }
+    },
+    // projectId: {
+    //     type: String,  
+    //    required: true
+    //   }
 });
 
 const TaskModel = mongoose.model('task', TaskSchema);

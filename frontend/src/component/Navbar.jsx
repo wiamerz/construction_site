@@ -9,7 +9,6 @@ function Navbar() {
       {/* Navigation Links */}
       <div className="flex space-x-6 text-lg">
         <a href="/" className="hover:text-red-500 transition duration-300">Home</a>
-        <a href="#about" className="hover:text-red-500 transition duration-300">About Us</a>
         <a href="#Projects" className="hover:text-red-500 transition duration-300">Projects</a>
         <a href="/gestion" className="bg-red-600 px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">Add Project</a>
       </div>

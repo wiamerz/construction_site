@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast, Toaster } from "react-hot-toast";
 import Navbar from './Navbar';
@@ -11,6 +11,7 @@ const AddTasks = () => {
         Description: '',
         StartDate: '',
         EndDate: '',
+        projectId: '',
     });
 
     const handleChange = (e) => {
@@ -30,7 +31,6 @@ const AddTasks = () => {
         if(!formData.Description.trim()) newErrors.Description= 'Description in required'
         if (!formData.StartDate.trim()) newErrors.StartDate = 'Start date is required';
         if (!formData.EndDate.trim()) newErrors.EndDate = 'End date is required';     
-        
         
         const startDate = new Date(formData.StartDate);
         const endDate = new Date (formData.EndDate);
@@ -55,7 +55,7 @@ const AddTasks = () => {
             Name: formData.Name, 
             Description: formData.Description, 
             StartDate: formData.StartDate, 
-            EndDate: formData.EndDate
+            EndDate: formData.EndDate,
         };
 
     try { 
@@ -85,19 +85,20 @@ const AddTasks = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-white p-6">
         <Toaster position="top-center" />
 
         <h1 className="text-3xl font-bold text-black m-10 p-10 text-center mb-8">
           Here where you can add your project's taks
         </h1>
 
-        <div className="bg-gray-50 rounded-lg shadow-md p-8 text-black w-full max-w-xl">
+        <div className="bg-gray-100 rounded-lg shadow-md p-8 text-black w-full max-w-xl">
           <h2 className="text-xl font-semibold flex text-red-600 items-center gap-2 mb-6">
             # Add a task
           </h2>
           
           <form onSubmit={handleSubmit} className="space-y-4"> 
+
             <label htmlFor="Name" className="text-gray-700 font-semibold">Task Name</label>
             <input
               type="text"

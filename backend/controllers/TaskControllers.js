@@ -3,6 +3,7 @@ import TaskModel from "../Models/Task.js";
 
 const CreatTask = async(req, res) => {
     try{
+        
         const task = await TaskModel.create(req.body);
         await task.save();
         res.status(200).send(task);
@@ -26,6 +27,19 @@ const GetTask = async(req, res) => {
         
     }
 }
+
+
+
+const getTasksByProject = async (req, res) => {
+    try {
+      const task = await TaskModel.find({ projectId: req.params.id });
+      res.status(200).json(task);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+
 
 const UpdateTask = async(req, res) => {
     try {
@@ -54,4 +68,4 @@ const DeleteTask = async(req, res) => {
 }
 
 
-export{CreatTask, GetTask, UpdateTask, DeleteTask};
+export{CreatTask, GetTask, getTasksByProject, UpdateTask, DeleteTask};

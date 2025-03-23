@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, Toaster } from "react-hot-toast";
+import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
@@ -84,14 +85,14 @@ const Gestion = () => {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-white p-6">
         <Toaster position="top-center" />
 
         <h1 className="text-3xl font-bold text-black m-10 p-10 text-center mb-8">
           Here where you can add your projects
         </h1>
 
-        <div className="bg-gray-50 rounded-lg shadow-md p-8 text-black w-full max-w-xl">
+        <div className="bg-gray-100 rounded-lg shadow-md p-8 text-black w-full max-w-xl">
           <h2 className="text-xl font-semibold flex text-red-600 items-center gap-2 mb-6">
             # Add a project
           </h2>
@@ -156,13 +157,13 @@ const Gestion = () => {
 
           </form>
         </div>
-
-        <button
-              type="submit"
-              className="flex justify-end items-end bg-red-600 text-white py-2 font-semibold hover:bg-red-700 transition"
+            {/* <Link to={`/AddTasks`}               
+            className="flex justify-end items-end m-10 bg-red-600 text-white py-2 font-semibold hover:bg-red-700 transition"
             >
               Add tasks
-            </button>
+            </Link> */}
+
+
       </div>
 
       <Footer/>

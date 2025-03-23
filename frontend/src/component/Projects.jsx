@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -146,12 +147,12 @@ const Projects = () => {
                       <button onClick={() => handleDelete(project._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                         Delete
                       </button >
-                      <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
+                      {/* <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                          details
-                      </button>
-                      {/* <Link to={`/project/${project._id}`} className="text-blue-500 hover:underline">
-                        Voir Détails
-                      </Link> */}
+                      </button> */}
+                      <Link to={`/project/${project._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
+                      details
+                      </Link>
 
                     </motion.div>
                   </td>
