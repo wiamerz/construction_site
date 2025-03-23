@@ -9,7 +9,7 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         require: [true, "project description required"]
     },
-    StartDate: { // Correction de la faute de frappe : StarteDate -> StartDate
+    StartDate: { 
         type: Date,
         require: [true, "Start date required"]
     },

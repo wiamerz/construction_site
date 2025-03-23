@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast, Toaster } from "react-hot-toast";
 import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Gestion = () => {
   const [errors, setErrors] = useState({});
@@ -160,9 +161,11 @@ const Gestion = () => {
               type="submit"
               className="flex justify-end items-end bg-red-600 text-white py-2 font-semibold hover:bg-red-700 transition"
             >
-              Submit
+              Add tasks
             </button>
       </div>
+
+      <Footer/>
     </>
   );
 }
