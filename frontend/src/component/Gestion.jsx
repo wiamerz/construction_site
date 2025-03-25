@@ -157,11 +157,6 @@ const Gestion = () => {
 
           </form>
         </div>
-            {/* <Link to={`/AddTasks`}               
-            className="flex justify-end items-end m-10 bg-red-600 text-white py-2 font-semibold hover:bg-red-700 transition"
-            >
-              Add tasks
-            </Link> */}
 
 
       </div>

@@ -1,12 +1,12 @@
 import express from "express";
-import { CreatTask, GetTask, getTasksByProject, UpdateTask, DeleteTask } from "../controllers/TaskControllers.js";
+import { createTaskByProject, getTasks, getTasksByProject, updateTask, deleteTask } from "../controllers/TaskControllers.js";
 
 const TaskRoute = express.Router();
 
-TaskRoute.post("/AddTask", CreatTask);
-TaskRoute.get("/GetTask", GetTask);
-TaskRoute.get('/GetTasksByProject/:projectId', getTasksByProject);
-TaskRoute.put("/UpdateTask/:id", UpdateTask);
-TaskRoute.delete("/DeleteTask/:id", DeleteTask);
+TaskRoute.post("/AddTask", createTaskByProject); 
+TaskRoute.get("/GetTasks", getTasks);
+TaskRoute.get("/GetTasksByProject/:projectId", getTasksByProject);
+TaskRoute.put("/UpdateTask/:id", updateTask);
+TaskRoute.delete("/DeleteTask/:id", deleteTask);
 
 export default TaskRoute;

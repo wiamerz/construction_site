@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const RessourceSchema = new mongoose.Schema({
-    title: {
+    Name: {
         type: String,
         require: [true, "Ressource name required"]
     },
@@ -12,6 +12,11 @@ const RessourceSchema = new mongoose.Schema({
     quantite: {
         type: Number,
         require: [true, "Ressource date required"]
+    },
+    taskID: { 
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "task",
+        required: true
     }
 });
 

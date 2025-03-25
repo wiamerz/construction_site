@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
+
 
 import myImage from "/src/assets/bg.jpg";
 import about from "/src/assets/about.jpg"

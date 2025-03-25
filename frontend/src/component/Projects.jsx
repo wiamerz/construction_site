@@ -101,7 +101,7 @@ const Projects = () => {
         # Projects
       </div>
 
-      {/* Table Container */}
+     
       <div className="overflow-x-auto border border-gray-300 rounded-lg shadow-lg">
         <table className="min-w-full bg-white">
           <thead className="bg-black text-white">
@@ -147,9 +147,7 @@ const Projects = () => {
                       <button onClick={() => handleDelete(project._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                         Delete
                       </button >
-                      {/* <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
-                         details
-                      </button> */}
+                      
                       <Link to={`/project/${project._id}`} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300 text-sm">
                       details
                       </Link>

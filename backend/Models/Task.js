@@ -3,25 +3,26 @@ import mongoose from "mongoose";
 const TaskSchema = new mongoose.Schema({
     Name: {
         type: String,
-        require: [true, "project name required"]
+        required: [true, "Task name required"]
     },
     Description: {
         type: String,
-        require: [true, "project description required"]
+        required: [true, "Task description required"]
     },
     StartDate: { 
         type: Date,
-        require: [true, "Start date required"]
+        required: [true, "Start date required"]
     },
     EndDate: {
         type: Date,
-        require: [true, "End date required"]
+        required: [true, "End date required"]
     },
-    // projectId: {
-    //     type: String,  
-    //    required: true
-    //   }
+    projectId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'project', 
+        required: true 
+    },
 });
 
-const TaskModel = mongoose.model('task', TaskSchema);
-export default TaskModel; 
+const TaskModel = mongoose.model('Task', TaskSchema);
+export default TaskModel;
